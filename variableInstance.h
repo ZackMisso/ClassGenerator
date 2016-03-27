@@ -1,0 +1,30 @@
+#ifndef __VARIABLEINSTANCE_H__
+#define __VARIABLEINSTANCE_H__
+
+#include <string>
+
+using namespace std;
+
+class VariableInstance {
+private:
+	string type;
+	string name;
+	bool isStatic;
+	bool isConst;
+public:
+	VariableInstance();
+	~VariableInstance();
+	// getter methods
+	string getType();
+	string getName();
+	bool getIsStatic();
+	bool getIsConst();
+	// setter methods
+	void setType(string param);
+	void setName(string param);
+	void setIsStatic(bool param);
+	void setIsConst(bool param);
+};
+
+#endif
+
