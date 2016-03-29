@@ -11,7 +11,7 @@ private:
 public:
 	Language();
 	~Language();
-	void writeClassInstance();
+	void writeClassInstance(ClassInstance* instance);
 	ClassInstance* readClassInstance(string name);
 };
 
