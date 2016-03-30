@@ -5,11 +5,13 @@
 
 class Cpp : public Language {
 private:
+public:
 	Cpp();
 	~Cpp();
-  void writeClassInstance(ClassInstance* instance);
-	ClassInstance* readClassInstance(string name);
-public:
+	virtual ClassInstance* readClassInstance(string name);
+  virtual void writeClassInstance(ClassInstance* instance);
+	void writeH(ClassInstance* instance);
+	void writeCpp(ClassInstance* instance);
 };
 
 #endif
