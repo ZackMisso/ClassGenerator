@@ -1,13 +1,16 @@
 #include "methodInstance.h"
 
 MethodInstance::MethodInstance() {
-	// to be implemented
+	arguements = new Array<ArguementInstance*>();
 }
 
 MethodInstance::~MethodInstance() {
-	// to be implemented
+	while(arguements->getSize())
+		delete arguements->removeLast();
+	delete arguements;
 }
 
+Array<ArguementInstance*>* MethodInstance::getArguements() { return arguements; }
 string MethodInstance::getName() { return name; }
 string MethodInstance::getType() { return type; }
 bool MethodInstance::getPriv() { return priv; }
@@ -15,6 +18,7 @@ bool MethodInstance::getProt() { return prot; }
 bool MethodInstance::getPub() { return pub; }
 bool MethodInstance::getIsStatic() { return isStatic; }
 
+void MethodInstance::setArguements(Array<ArguementInstance*>* param) { arguements = param; }
 void MethodInstance::setName(string param) { name = param; }
 void MethodInstance::setType(string param) { type = param; }
 void MethodInstance::setPriv(bool param) { priv = param; }

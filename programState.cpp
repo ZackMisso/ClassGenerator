@@ -8,4 +8,5 @@ ProgramState::~ProgramState() { }
 
 bool ProgramState::getRunning() { return running; }
 
-void ProgramState::setRunnint(bool param) { running = param; }
+void ProgramState::setRunning(bool param) { running = param; }
+

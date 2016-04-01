@@ -1,7 +1,11 @@
 // This Project Will Allow Me To Generate CPP Classes By Command Line
 
 #include "programState.h"
+#include "lazy.h"
 #include <iostream>
+#include <stdarg.h>
+#include <unistd.h>
+#include <cstdlib>
 
 using namespace std;
 

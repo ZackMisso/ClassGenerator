@@ -1,22 +1,16 @@
 #include "constructor.h"
 
 Constructor::Constructor() {
-	arguementNames = new Array<string>();
-	arguementTypes = new Array<string>();
+	arguements = new Array<ArguementInstance*>();
 }
 
 Constructor::~Constructor() {
-	while(arguementNames->getSize())
-		arguementNames->removeLast();
-	while(arguementTypes->getSize())
-		arguementTypes->removeLast();
-	delete arguementNames;
-	delete arguementTypes;
+	while(arguements->getSize())
+		delete arguements->removeLast();
+	delete arguements;
 }
 
-Array<string>* Constructor::getArguementNames() { return arguementNames; }
-Array<string>* Constructor::getArguementTypes() { return arguementTypes; }
+Array<ArguementInstance*>* Constructor::getArguements() { return arguements; }
 
-void Constructor::setArguementNames(Array<string>* param) { arguementNames = param; }
-void Constructor::setArguementTypes(Array<string>* param) { arguementTypes = param; }
+void Constructor::setArguements(Array<ArguementInstance*>* param) { arguements = param; }
 

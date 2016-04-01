@@ -2,23 +2,21 @@
 #define __CONSTRUCTOR_H__
 
 #include "array.h"
+#include "arguementInstance.h"
 #include <string>
 
 using namespace std;
 
 class Constructor {
 private:
-	Array<string>* arguementNames;
-	Array<string>* arguementTypes;
+	Array<ArguementInstance*>* arguements;
 public:
 	Constructor();
 	~Constructor();
 	// getter methods
-	Array<string>* getArguementNames();
-	Array<string>* getArguementTypes();
+	Array<ArguementInstance*>* getArguements();
 	// setter methods
-	void setArguementNames(Array<string>* param);
-	void setArguementTypes(Array<string>* param);
+	void setArguements(Array<ArguementInstance*>* param);
 };
 
 #endif

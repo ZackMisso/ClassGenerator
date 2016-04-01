@@ -1,12 +1,15 @@
 #ifndef __METHODINSTANCE_H__
 #define __METHODINSTANCE_H__
 
+#include "arguementInstance.h"
+#include "array.h"
 #include <string>
 
 using namespace std;
 
 class MethodInstance {
 private:
+	Array<ArguementInstance*>* arguements;
 	string name;
 	string type;
 	bool priv;
@@ -17,6 +20,7 @@ public:
 	MethodInstance();
 	~MethodInstance();
 	// getter methods
+	Array<ArguementInstance*>* getArguements();
 	string getName();
 	string getType();
 	bool getPriv();
@@ -24,6 +28,7 @@ public:
 	bool getPub();
 	bool getIsStatic();
 	// setter methods
+	void setArguements(Array<ArguementInstance*>* param);
 	void setName(string param);
 	void setType(string param);
 	void setPriv(bool param);
