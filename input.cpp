@@ -17,3 +17,13 @@ string Input::getStringInput() {
 	// to be implemented
 	return "ad";
 }
+
+string Input::getLineInput() {
+	// to be implemented
+	return "ab";
+}
+
+vector<string>* Input::breakLineInput(string line) {
+	// to be implemented
+	return 0x0;
+}

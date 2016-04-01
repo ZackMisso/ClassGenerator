@@ -2,6 +2,7 @@
 #define __INPUT_H__
 
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -12,6 +13,8 @@ public:
 	~Input();
 	int getIntInput();
 	string getStringInput();
+	string getLineInput();
+	vector<string>* breakLineInput(string line);
 };
 
 #endif
