@@ -6,6 +6,7 @@
 class Lazy {
 private:
 	ProgramState* programState;
+	Input* input;
 	void drawTitle();
 public:
 	Lazy(ProgramState* param);

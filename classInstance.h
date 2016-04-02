@@ -6,6 +6,7 @@
 #include "methodInstance.h"
 #include "constructor.h"
 #include "include.h"
+#include "input.h"
 #include <string>
 
 using namespace std;
@@ -18,6 +19,7 @@ private:
 	Array<Include*>* includes;
 	string name;
 	string parent;
+	bool hasDeconstructor;
 	bool isSingleton;
 	bool extends;
 public:
@@ -30,6 +32,7 @@ public:
 	Array<Include*>* getIncludes();
 	string getName();
 	string getParent();
+	bool getHasDeconstructor();
 	bool getIsSingleton();
 	bool getExtends();
 	// setter methods
@@ -39,6 +42,7 @@ public:
 	void setIncludes(Array<Include*>* param);
 	void setName(string param);
 	void setParent(string param);
+	void setHasDeconstructor(bool param);
 	void setIsSingleton(bool param);
 	void setExtends(bool param);
 };
