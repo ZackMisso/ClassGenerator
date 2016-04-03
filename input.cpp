@@ -1,4 +1,7 @@
 #include "input.h"
+#include <iostream>
+
+using namespace std;
 
 Input::Input() {
 	// to be implemented
@@ -24,6 +27,7 @@ string Input::getLineInput() {
 }
 
 vector<string>* Input::breakLineInput(string line) {
+	cout << "Still Need To Implement Input" << endl;
 	// to be implemented
 	return 0x0;
 }

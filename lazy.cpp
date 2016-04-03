@@ -19,6 +19,7 @@ void Lazy::drawTitle() {
 }
 
 void Lazy::run() {
+	cout << "About To Run" << endl;
 	while(programState->getRunning()) {
 		vector<string>* readLineP = input->breakLineInput(input->getLineInput());
 		vector<string> readLine = *readLineP;

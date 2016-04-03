@@ -22,6 +22,10 @@ int main(int argc,char** argv) {
 				state->setRunning(false);
 				break;
 			}
+			case 'l': {
+				// load in the parameter
+				break;
+			}
 			default:
 				break;
 		}

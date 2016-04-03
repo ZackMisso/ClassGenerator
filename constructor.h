@@ -2,12 +2,13 @@
 #define __CONSTRUCTOR_H__
 
 #include "array.h"
+#include "member.h"
 #include "arguementInstance.h"
 #include <string>
 
 using namespace std;
 
-class Constructor {
+class Constructor : public Member{
 private:
 	Array<ArguementInstance*>* arguements;
 public:

@@ -1,18 +1,16 @@
 #ifndef __VARIABLEINSTANCE_H__
 #define __VARIABLEINSTANCE_H__
 
+#include "member.h"
 #include <string>
 #include <vector>
 
 using namespace std;
 
-class VariableInstance {
+class VariableInstance : public Member {
 private:
 	string type;
 	string name;
-	bool priv;
-	bool prot;
-	bool pub;
 	bool isStatic;
 	bool isConst;
 	bool hasGetter;
@@ -24,17 +22,11 @@ public:
 	// getter methods
 	string getType();
 	string getName();
-	bool getPriv();
-	bool getProt();
-	bool getPub();
 	bool getIsStatic();
 	bool getIsConst();
 	bool getHasGetter();
 	bool getHasSetter();
 	// setter methods
-	void setPriv(bool param);
-	void setProt(bool param);
-	void setPub(bool param);
 	void setType(string param);
 	void setName(string param);
 	void setIsStatic(bool param);
