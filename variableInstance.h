@@ -2,6 +2,7 @@
 #define __VARIABLEINSTANCE_H__
 
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ private:
 public:
 	VariableInstance();
 	~VariableInstance();
+	static VariableInstance* createVariable(string variableName,string flags,vector<string>* input);
 	// getter methods
 	string getType();
 	string getName();
@@ -42,4 +44,3 @@ public:
 };
 
 #endif
-

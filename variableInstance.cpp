@@ -8,6 +8,11 @@ VariableInstance::~VariableInstance() {
 	// to be implemented
 }
 
+VariableInstance* VariableInstance::createVariable(string variableName,string flags,vector<string>* input) {
+	// to be implemented
+	return 0x0;
+}
+
 string VariableInstance::getType() { return type; }
 string VariableInstance::getName() { return name; }
 bool VariableInstance::getIsStatic() { return isStatic; }
@@ -27,4 +32,3 @@ void VariableInstance::setHasSetter(bool param) { hasSetter = param; }
 void VariableInstance::setPriv(bool param) { priv = param; }
 void VariableInstance::setProt(bool param) { prot = param; }
 void VariableInstance::setPub(bool param) { pub = param; }
-

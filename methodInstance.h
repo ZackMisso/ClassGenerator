@@ -4,6 +4,7 @@
 #include "arguementInstance.h"
 #include "array.h"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ private:
 public:
 	MethodInstance();
 	~MethodInstance();
+	static MethodInstance* createMethod(string methodName,string flags,vector<string>* input);
 	// getter methods
 	Array<ArguementInstance*>* getArguements();
 	string getName();
@@ -38,4 +40,3 @@ public:
 };
 
 #endif
-

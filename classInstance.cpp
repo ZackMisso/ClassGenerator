@@ -24,12 +24,18 @@ ClassInstance::~ClassInstance() {
 	delete includes;
 }
 
+ClassInstance* ClassInstance::createClass(string className,string flags,vector<string>* input) {
+	// to be implemented
+	return 0x0;
+}
+
 Array<Constructor*>* ClassInstance::getConstructors() { return constructors; }
 Array<VariableInstance*>* ClassInstance::getVariables() { return variables; }
 Array<MethodInstance*>* ClassInstance::getMethods() { return methods; }
 Array<Include*>* ClassInstance::getIncludes() { return includes; }
 string ClassInstance::getName() { return name; }
 string ClassInstance::getParent() { return parent; }
+bool ClassInstance::getHasDeconstructor() { return hasDeconstructor; }
 bool ClassInstance::getIsSingleton() { return isSingleton; }
 bool ClassInstance::getExtends() { return extends; }
 
@@ -39,6 +45,6 @@ void ClassInstance::setMethods(Array<MethodInstance*>* param) { methods = param;
 void ClassInstance::setIncludes(Array<Include*>* param) { includes = param; }
 void ClassInstance::setName(string param) { name = param; }
 void ClassInstance::setParent(string param) { parent = param; }
+void ClassInstance::setHasDeconstructor(bool param) { hasDeconstructor = param; }
 void ClassInstance::setIsSingleton(bool param) { isSingleton = param; }
 void ClassInstance::setExtends(bool param) { extends = param; }
-

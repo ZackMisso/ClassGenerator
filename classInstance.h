@@ -8,6 +8,7 @@
 #include "include.h"
 #include "input.h"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -25,6 +26,7 @@ private:
 public:
 	ClassInstance();
 	~ClassInstance();
+	static ClassInstance* createClass(string className,string flags,vector<string>* input);
 	// getter methods
 	Array<Constructor*>* getConstructors();
 	Array<VariableInstance*>* getVariables();
@@ -48,4 +50,3 @@ public:
 };
 
 #endif
-

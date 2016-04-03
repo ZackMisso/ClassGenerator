@@ -12,6 +12,7 @@ private:
 	bool isConst;
 public:
 	ArguementInstance();
+	ArguementInstance(string t,string n);
 	~ArguementInstance();
 	// getter methods
 	string getType();

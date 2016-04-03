@@ -12,6 +12,7 @@ private:
 	Array<ArguementInstance*>* arguements;
 public:
 	Constructor();
+	Constructor(Array<ArguementInstance*>* param);
 	~Constructor();
 	// getter methods
 	Array<ArguementInstance*>* getArguements();
@@ -20,4 +21,3 @@ public:
 };
 
 #endif
-

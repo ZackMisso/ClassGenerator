@@ -10,6 +10,11 @@ MethodInstance::~MethodInstance() {
 	delete arguements;
 }
 
+MethodInstance* MethodInstance::createMethod(string methodName,string flags,vector<string>* input) {
+	// to be implemented
+	return 0x0;
+}
+
 Array<ArguementInstance*>* MethodInstance::getArguements() { return arguements; }
 string MethodInstance::getName() { return name; }
 string MethodInstance::getType() { return type; }
@@ -25,4 +30,3 @@ void MethodInstance::setPriv(bool param) { priv = param; }
 void MethodInstance::setProt(bool param) { prot = param; }
 void MethodInstance::setPub(bool param) { pub = param; }
 void MethodInstance::setIsStatic(bool param) { isStatic = param; }
-

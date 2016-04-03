@@ -14,4 +14,3 @@ bool Include::getSigns() { return signs; }
 void Include::setName(string param) { name = param; }
 void Include::setQuotes(bool param) { quotes = param; }
 void Include::setSigns(bool param) { signs = param; }
-
