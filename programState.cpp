@@ -24,6 +24,29 @@ void ProgramState::bake() {
 	// to be implemented
 }
 
+void ProgramState::displayAll() {
+	for(int i=0;i<classes->getSize();i++)
+		classes->get(i)->display();
+}
+
+void ProgramState::displayAllMethods(ClassInstance* instance) {
+	Array<MethodInstance*>* methods = instance->getMethods();
+	for(int i=0;i<methods->getSize();i++)
+		methods->get(i)->display();
+}
+
+void ProgramState::displayAllVariables(ClassInstance* instance) {
+	Array<VariableInstance*>* variables = instance->getVariables();
+	for(int i=0;i<variables->getSize();i++)
+		variables->get(i)->display();
+}
+
+void ProgramState::displayAllConstructors(ClassInstance* instance) {
+	Array<Constructor*>* constructors = instance->getConstructors();
+	for(int i=0;i<constructors->getSize();i++)
+		constructors->get(i)->display();
+}
+
 Array<ClassInstance*>* ProgramState::getClasses() { return classes; }
 ClassInstance* ProgramState::getCurrentClass() { return currentClass; }
 MethodInstance* ProgramState::getCurrentMethod() { return currentMethod; }
@@ -37,4 +60,3 @@ void ProgramState::setCurrentMethod(MethodInstance* param) { currentMethod = par
 void ProgramState::setCurrentVariable(VariableInstance* param) { currentVariable = param; }
 void ProgramState::setCurrentConstructor(Constructor* param) { currentConstructor = param; }
 void ProgramState::setRunning(bool param) { running = param; }
-

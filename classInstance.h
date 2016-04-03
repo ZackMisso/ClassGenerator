@@ -26,6 +26,7 @@ private:
 public:
 	ClassInstance();
 	~ClassInstance();
+	void display();
 	static ClassInstance* createClass(string className,string flags,vector<string>* input);
 	// getter methods
 	Array<Constructor*>* getConstructors();

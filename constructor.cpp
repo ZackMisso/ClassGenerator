@@ -1,4 +1,7 @@
 #include "constructor.h"
+#include <iostream>
+
+using namespace std;
 
 Constructor::Constructor() {
 	arguements = new Array<ArguementInstance*>();
@@ -12,6 +15,14 @@ Constructor::~Constructor() {
 	while(arguements->getSize())
 		delete arguements->removeLast();
 	delete arguements;
+}
+
+void Constructor::display() {
+	cout << "Constructor :: " << endl;
+	for(int i=0;i<arguements->getSize();i++) {
+		cout << "  ";
+		arguements->get(i)->display();
+	}
 }
 
 Array<ArguementInstance*>* Constructor::getArguements() { return arguements; }

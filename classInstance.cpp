@@ -1,4 +1,7 @@
 #include "classInstance.h"
+#include <iostream>
+
+using namespace std;
 
 ClassInstance::ClassInstance() {
 	constructors = new Array<Constructor*>();
@@ -22,6 +25,32 @@ ClassInstance::~ClassInstance() {
 	delete methods;
 	delete variables;
 	delete includes;
+}
+
+void ClassInstance::display() {
+	cout << "Class :: " << name << " ";
+	if(extends)
+		cout << "Parent :: " << parent << " ";
+	if(isSingleton)
+		cout << "Singleton :: " << isSingleton;
+	cout << endl;
+	cout << "Constructors :: " << endl;
+	for(int i=0;i<constructors->getSize();i++) {
+		cout << "  " << endl;
+		constructors->get(i)->display();
+	}
+	cout << endl;
+	cout << "Methods :: " << endl;
+	for(int i=0;i<methods->getSize();i++) {
+		cout << "  " << endl;
+		methods->get(i)->display();
+	}
+	cout << endl;
+	cout << "Variables :: " << endl;
+	for(int i=0;i<variables->getSize();i++) {
+		cout << "  " << endl;
+		variables->get(i)->display();
+	}
 }
 
 ClassInstance* ClassInstance::createClass(string className,string flags,vector<string>* input) {

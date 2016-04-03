@@ -18,6 +18,7 @@ private:
 public:
 	VariableInstance();
 	~VariableInstance();
+	void display();
 	static VariableInstance* createVariable(string variableName,string flags,vector<string>* input);
 	// getter methods
 	string getType();

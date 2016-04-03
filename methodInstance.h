@@ -15,20 +15,24 @@ private:
 	string name;
 	string type;
 	bool isStatic;
+	bool isConst;
 public:
 	MethodInstance();
 	~MethodInstance();
+	void display();
 	static MethodInstance* createMethod(string methodName,string flags,vector<string>* input);
 	// getter methods
 	Array<ArguementInstance*>* getArguements();
 	string getName();
 	string getType();
 	bool getIsStatic();
+	bool getIsConst();
 	// setter methods
 	void setArguements(Array<ArguementInstance*>* param);
 	void setName(string param);
 	void setType(string param);
 	void setIsStatic(bool param);
+	void setIsConst(bool param);
 };
 
 #endif

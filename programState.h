@@ -20,6 +20,10 @@ public:
 	~ProgramState();
 	void help();
 	void bake();
+	void displayAll();
+	void displayAllMethods(ClassInstance* instance);
+	void displayAllVariables(ClassInstance* instance);
+	void displayAllConstructors(ClassInstance* instance);
 	// getter methods
 	Array<ClassInstance*>* getClasses();
 	ClassInstance* getCurrentClass();

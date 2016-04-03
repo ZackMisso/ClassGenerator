@@ -14,6 +14,7 @@ public:
 	ArguementInstance();
 	ArguementInstance(string t,string n);
 	~ArguementInstance();
+	void display();
 	// getter methods
 	string getType();
 	string getName();

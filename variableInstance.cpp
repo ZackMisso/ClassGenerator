@@ -1,4 +1,7 @@
 #include "variableInstance.h"
+#include <iostream>
+
+using namespace std;
 
 VariableInstance::VariableInstance() {
 	// to be implemented
@@ -6,6 +9,26 @@ VariableInstance::VariableInstance() {
 
 VariableInstance::~VariableInstance() {
 	// to be implemented
+}
+
+void VariableInstance::display() {
+	cout << "Variable :: " << name << " Type :: " << type;
+	cout << " ";
+	if(hasGetter)
+		cout << "g";
+	if(hasSetter)
+		cout << "s";
+	if(isConst)
+		cout << "c";
+	if(isStatic)
+		cout << "t";
+	if(getPriv())
+		cout << "1";
+	else if(getProt())
+		cout << "2";
+	else if(getPub())
+		cout << "3";
+	cout << endl;
 }
 
 VariableInstance* VariableInstance::createVariable(string variableName,string flags,vector<string>* input) {

@@ -1,4 +1,7 @@
 #include "arguementInstance.h"
+#include <iostream>
+
+using namespace std;
 
 ArguementInstance::ArguementInstance() {
 	isConst = false;
@@ -13,6 +16,13 @@ ArguementInstance::ArguementInstance(string t,string n) {
 }
 
 ArguementInstance::~ArguementInstance() { }
+
+void ArguementInstance::display() {
+	cout << "Arguement :: " << type << " " << name;
+	if(isConst)
+		cout << " c";
+	cout << endl;
+}
 
 string ArguementInstance::getType() { return type; }
 string ArguementInstance::getName() { return name; }

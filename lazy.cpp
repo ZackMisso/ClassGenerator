@@ -35,6 +35,38 @@ void Lazy::run() {
 			else if(readLine[0] == "bake") {
 				programState->bake();
 			}
+			else if(readLine[0] == "da") {
+				// display all
+				programState->displayAll();
+			}
+			else if(readLine[0] == "dcl") {
+				// displays the current class
+				programState->getCurrentClass()->display();
+			}
+			else if(readLine[0] == "dm") {
+				// displays all methods in current class
+				programState->displayAllMethods(programState->getCurrentClass());
+			}
+			else if(readLine[0] == "dv") {
+				// displays all variables in current class
+				programState->displayAllVariables(programState->getCurrentClass());
+			}
+			else if(readLine[0] == "dco") {
+				// displays all constructors in current class
+				programState->displayAllConstructors(programState->getCurrentClass());
+			}
+			else if(readLine[0] == "dcm") {
+				// displays current method
+				programState->getCurrentMethod()->display();
+			}
+			else if(readLine[0] == "dcv") {
+				// displays current variable
+				programState->getCurrentVariable()->display();
+			}
+			else if(readLine[0] == "dcc") {
+				// displays current constructor
+				programState->getCurrentConstructor()->display();
+			}
 			else {
 				cout << "Input Not Recognized" << endl;
 			}
