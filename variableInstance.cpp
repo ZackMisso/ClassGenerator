@@ -31,6 +31,10 @@ void VariableInstance::display() {
 	cout << endl;
 }
 
+void VariableInstance::lineInfo() {
+	// to be implemented
+}
+
 VariableInstance* VariableInstance::createVariable(string variableName,string flags,vector<string>* input) {
 	// to be implemented
 	return 0x0;

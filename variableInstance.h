@@ -19,6 +19,7 @@ public:
 	VariableInstance();
 	~VariableInstance();
 	void display();
+	void lineInfo();
 	static VariableInstance* createVariable(string variableName,string flags,vector<string>* input);
 	// getter methods
 	string getType();

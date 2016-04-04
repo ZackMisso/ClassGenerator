@@ -53,6 +53,10 @@ void ClassInstance::display() {
 	}
 }
 
+void ClassInstance::lineInfo() {
+	// to be implemented
+}
+
 ClassInstance* ClassInstance::createClass(string className,string flags,vector<string>* input) {
 	// to be implemented
 	return 0x0;

@@ -67,6 +67,22 @@ void Lazy::run() {
 				// displays current constructor
 				programState->getCurrentConstructor()->display();
 			}
+			else if(readLine[0] == "dcli") {
+				// displays list of classes and user chooses which one to display
+				programState->chooseAndDisplayClass(input);
+			}
+			else if(readLine[0] == "dmi") {
+				// displays list of methods and user chooses which one to display
+				programState->chooseAndDisplayMethod(input);
+			}
+			else if(readLine[0] == "dvi") {
+				// displays list of variables and user chooses which one to display
+				programState->chooseAndDisplayVariable(input);
+			}
+			else if(readLine[0] == "dcoi") {
+				// displays list of constructors and user chooses which one to display
+				programState->chooseAndDisplayConstructor(input);
+			}
 			else {
 				cout << "Input Not Recognized" << endl;
 			}

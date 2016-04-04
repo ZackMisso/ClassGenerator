@@ -20,6 +20,7 @@ public:
 	MethodInstance();
 	~MethodInstance();
 	void display();
+	void lineInfo();
 	static MethodInstance* createMethod(string methodName,string flags,vector<string>* input);
 	// getter methods
 	Array<ArguementInstance*>* getArguements();

@@ -1,4 +1,7 @@
 #include "programState.h"
+#include <iostream>
+
+using namespace std;
 
 ProgramState::ProgramState() {
 	classes = new Array<ClassInstance*>();
@@ -45,6 +48,77 @@ void ProgramState::displayAllConstructors(ClassInstance* instance) {
 	Array<Constructor*>* constructors = instance->getConstructors();
 	for(int i=0;i<constructors->getSize();i++)
 		constructors->get(i)->display();
+}
+
+void ProgramState::chooseAndDisplayClass(Input* input) {
+	// info logic
+	for(int i=0;i<classes->getSize();i++) {
+		cout << i << " ";
+		classes->get(i)->lineInfo();
+	}
+	// choose logic
+	int choice = input->getIntInput();
+	if(choice < 0 || choice >= classes->getSize())
+		cout << "Please choose a valid choice" << endl;
+	else
+		classes->get(choice)->display();
+}
+
+void ProgramState::chooseAndDisplayMethod(Input* input) {
+	if(!currentClass) {
+		cout << "Please choose a class first" << endl;
+		return;
+	}
+	// info logic
+	Array<MethodInstance*>* methods = currentClass->getMethods();
+	for(int i=0;i<methods->getSize();i++) {
+		cout << i << " ";
+		methods->get(i)->lineInfo();
+	}
+	// choose logic
+	int choice = input->getIntInput();
+	if(choice >= methods->getSize() || choice < 0)
+		cout << "Please choose a valid item" << endl;
+	else
+		methods->get(choice)->display();
+}
+
+void ProgramState::chooseAndDisplayVariable(Input* input) {
+	if(!currentClass) {
+		cout << "Please choose a class first" << endl;
+		return;
+	}
+	// info logic
+	Array<VariableInstance*>* variables = currentClass->getVariables();
+	for(int i=0;i<variables->getSize();i++) {
+		cout << i << " ";
+		variables->get(i)->lineInfo();
+	}
+	// choose logic
+	int choice = input->getIntInput();
+	if(choice < 0 || choice >= variables->getSize())
+		cout << "Please make a valid choice" << endl;
+	else
+		variables->get(choice)->display();
+}
+
+void ProgramState::chooseAndDisplayConstructor(Input* input) {
+	if(!currentClass) {
+		cout << "Please choose a class first" << endl;
+		return;
+	}
+	// info logic
+	Array<Constructor*>* constructors = currentClass->getConstructors();
+	for(int i=0;i<constructors->getSize();i++) {
+		cout << i << " ";
+		constructors->get(i)->lineInfo();
+	}
+	// choose logic
+	int choice = input->getIntInput();
+	if(choice < 0 || choice >= constructors->getSize())
+		cout << "Please make a valid choice" << endl;
+	else
+		constructors->get(choice)->display();
 }
 
 Array<ClassInstance*>* ProgramState::getClasses() { return classes; }
