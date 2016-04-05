@@ -1,4 +1,5 @@
 #include "lazy.h"
+#include "cpp.h"
 #include <iostream>
 #include <vector>
 
@@ -7,6 +8,7 @@ using namespace std;
 Lazy::Lazy(ProgramState* param) {
 	programState = param;
 	input = new Input();
+	language = new Cpp();
 }
 
 Lazy::~Lazy() {
@@ -34,6 +36,7 @@ void Lazy::run() {
 			}
 			else if(readLine[0] == "bake") {
 				programState->bake();
+				programState->setRunning(false);
 			}
 			else if(readLine[0] == "da") {
 				// display all
