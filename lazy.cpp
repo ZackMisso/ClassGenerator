@@ -33,6 +33,7 @@ void Lazy::run() {
 				programState->setRunning(false);
 			}
 			else if(readLine[0] == "bake") {
+				// writes all of the created data to files
 				programState->bake();
 			}
 			else if(readLine[0] == "da") {
