@@ -37,6 +37,10 @@ void MethodInstance::display() {
 	}
 }
 
+void MethodInstance::lineInfo() {
+	// to be implemented
+}
+
 MethodInstance* MethodInstance::createMethod(string methodName,string flags,vector<string>* input) {
 	// to be implemented
 	return 0x0;

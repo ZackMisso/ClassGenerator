@@ -25,6 +25,10 @@ void Constructor::display() {
 	}
 }
 
+void Constructor::lineInfo() {
+	// to be implemented
+}
+
 Array<ArguementInstance*>* Constructor::getArguements() { return arguements; }
 
 void Constructor::setArguements(Array<ArguementInstance*>* param) { arguements = param; }

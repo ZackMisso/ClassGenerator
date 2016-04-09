@@ -16,6 +16,7 @@ public:
 	Constructor(Array<ArguementInstance*>* param);
 	~Constructor();
 	void display();
+	void lineInfo();
 	// getter methods
 	Array<ArguementInstance*>* getArguements();
 	// setter methods

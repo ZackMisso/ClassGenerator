@@ -2,7 +2,7 @@ CC=clang++
 #CC=g++
 CFLAGS+= -std=c++11
 
-PROD= Lazy
+PROD=lazy
 
 SRCS= $(shell ls *.cpp)
 

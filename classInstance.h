@@ -27,6 +27,7 @@ public:
 	ClassInstance();
 	~ClassInstance();
 	void display();
+	void lineInfo();
 	static ClassInstance* createClass(string className,string flags,vector<string>* input);
 	// getter methods
 	Array<Constructor*>* getConstructors();

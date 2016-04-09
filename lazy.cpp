@@ -1,4 +1,5 @@
 #include "lazy.h"
+#include "cpp.h"
 #include <iostream>
 #include <vector>
 
@@ -7,6 +8,7 @@ using namespace std;
 Lazy::Lazy(ProgramState* param) {
 	programState = param;
 	input = new Input();
+	language = new Cpp();
 }
 
 Lazy::~Lazy() {
@@ -35,6 +37,7 @@ void Lazy::run() {
 			else if(readLine[0] == "bake") {
 				// writes all of the created data to files
 				programState->bake();
+				programState->setRunning(false);
 			}
 			else if(readLine[0] == "da") {
 				// display all
@@ -67,6 +70,22 @@ void Lazy::run() {
 			else if(readLine[0] == "dcc") {
 				// displays current constructor
 				programState->getCurrentConstructor()->display();
+			}
+			else if(readLine[0] == "dcli") {
+				// displays list of classes and user chooses which one to display
+				programState->chooseAndDisplayClass(input);
+			}
+			else if(readLine[0] == "dmi") {
+				// displays list of methods and user chooses which one to display
+				programState->chooseAndDisplayMethod(input);
+			}
+			else if(readLine[0] == "dvi") {
+				// displays list of variables and user chooses which one to display
+				programState->chooseAndDisplayVariable(input);
+			}
+			else if(readLine[0] == "dcoi") {
+				// displays list of constructors and user chooses which one to display
+				programState->chooseAndDisplayConstructor(input);
 			}
 			else {
 				cout << "Input Not Recognized" << endl;

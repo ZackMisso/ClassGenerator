@@ -5,6 +5,7 @@
 #include "methodInstance.h"
 #include "variableInstance.h"
 #include "constructor.h"
+#include "input.h"
 #include "array.h"
 
 class ProgramState {
@@ -24,6 +25,10 @@ public:
 	void displayAllMethods(ClassInstance* instance);
 	void displayAllVariables(ClassInstance* instance);
 	void displayAllConstructors(ClassInstance* instance);
+	void chooseAndDisplayClass(Input* input);
+	void chooseAndDisplayMethod(Input* input);
+	void chooseAndDisplayVariable(Input* input);
+	void chooseAndDisplayConstructor(Input* input);
 	// getter methods
 	Array<ClassInstance*>* getClasses();
 	ClassInstance* getCurrentClass();
