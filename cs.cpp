@@ -14,7 +14,7 @@ ClassInstance* CS::readClassInstance(string name) {
 }
 
 void CS::writeClassInstance(ClassInstance* instance) {
-  // to be implemented
+  writeCS(instance);
 }
 
 void CS::writeCS(ClassInstance* instance) {

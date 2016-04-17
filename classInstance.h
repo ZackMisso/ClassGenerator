@@ -29,6 +29,16 @@ public:
 	void display();
 	void lineInfo();
 	static ClassInstance* createClass(string className,string flags,vector<string>* input);
+	// members by access method
+	Array<Constructor*>* getPrivateConstructors();
+	Array<Constructor*>* getProtectedConstructors();
+	Array<Constructor*>* getPublicConstructors();
+	Array<MethodInstance*>* getPrivateMethods();
+	Array<MethodInstance*>* getProtectedMethods();
+	Array<MethodInstance*>* getPublicMethods();
+	Array<VariableInstance*>* getPrivateVariables();
+	Array<VariableInstance*>* getProtectedVariables();
+	Array<VariableInstance*>* getPublicVariables();
 	// getter methods
 	Array<Constructor*>* getConstructors();
 	Array<VariableInstance*>* getVariables();

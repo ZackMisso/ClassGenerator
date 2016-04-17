@@ -62,6 +62,78 @@ ClassInstance* ClassInstance::createClass(string className,string flags,vector<s
 	return 0x0;
 }
 
+Array<Constructor*>* ClassInstance::getPrivateConstructors() {
+	Array<Constructor*>* list = new Array<Constructor*>();
+	for(int i=0;i<constructors->getSize();i++)
+		if(constructors->get(i)->getPriv())
+			list->add(constructors->get(i));
+	return list;
+}
+
+Array<Constructor*>* ClassInstance::getProtectedConstructors() {
+	Array<Constructor*>* list = new Array<Constructor*>();
+	for(int i=0;i<constructors->getSize();i++)
+		if(constructors->get(i)->getProt())
+			list->add(constructors->get(i));
+	return list;
+}
+
+Array<Constructor*>* ClassInstance::getPublicConstructors() {
+	Array<Constructor*>* list = new Array<Constructor*>();
+	for(int i=0;i<constructors->getSize();i++)
+		if(constructors->get(i)->getPub())
+			list->add(constructors->get(i));
+	return list;
+}
+
+Array<MethodInstance*>* ClassInstance::getPrivateMethods() {
+	Array<MethodInstance*>* list = new Array<MethodInstance*>();
+	for(int i=0;i<methods->getSize();i++)
+		if(methods->get(i)->getPriv())
+			list->add(methods->get(i));
+	return list;
+}
+
+Array<MethodInstance*>* ClassInstance::getProtectedMethods() {
+	Array<MethodInstance*>* list = new Array<MethodInstance*>();
+	for(int i=0;i<methods->getSize();i++)
+		if(methods->get(i)->getProt())
+			list->add(methods->get(i));
+	return list;
+}
+
+Array<MethodInstance*>* ClassInstance::getPublicMethods() {
+	Array<MethodInstance*>* list = new Array<MethodInstance*>();
+	for(int i=0;i<methods->getSize();i++)
+		if(methods->get(i)->getPub())
+			list->add(methods->get(i));
+	return list;
+}
+
+Array<VariableInstance*>* ClassInstance::getPrivateVariables() {
+	Array<VariableInstance*>* list = new Array<VariableInstance*>();
+	for(int i=0;i<variables->getSize();i++)
+		if(variables->get(i)->getPriv())
+			list->add(variables->get(i));
+	return list;
+}
+
+Array<VariableInstance*>* ClassInstance::getProtectedVariables() {
+	Array<VariableInstance*>* list = new Array<VariableInstance*>();
+	for(int i=0;i<variables->getSize();i++)
+		if(variables->get(i)->getProt())
+			list->add(variables->get(i));
+	return list;
+}
+
+Array<VariableInstance*>* ClassInstance::getPublicVariables() {
+	Array<VariableInstance*>* list = new Array<VariableInstance*>();
+	for(int i=0;i<variables->getSize();i++)
+		if(variables->get(i)->getPub())
+			list->add(variables->get(i));
+	return list;
+}
+
 Array<Constructor*>* ClassInstance::getConstructors() { return constructors; }
 Array<VariableInstance*>* ClassInstance::getVariables() { return variables; }
 Array<MethodInstance*>* ClassInstance::getMethods() { return methods; }
