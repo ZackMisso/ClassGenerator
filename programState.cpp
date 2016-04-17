@@ -10,6 +10,8 @@ ProgramState::ProgramState() {
 	currentVariable = 0x0;
 	currentConstructor = 0x0;
 	running = false;
+	acceptingTypeInput = true;
+	scrolling = false;
 }
 
 ProgramState::~ProgramState() {
@@ -127,6 +129,8 @@ MethodInstance* ProgramState::getCurrentMethod() { return currentMethod; }
 VariableInstance* ProgramState::getCurrentVariable() { return currentVariable; }
 Constructor* ProgramState::getCurrentConstructor() { return currentConstructor; }
 bool ProgramState::getRunning() { return running; }
+bool ProgramState::getAcceptingTypeInput() { return acceptingTypeInput; }
+bool ProgramState::getScrolling() { return scrolling; }
 
 void ProgramState::setClasses(Array<ClassInstance*>* param) { classes = param; }
 void ProgramState::setCurrentClass(ClassInstance* param) { currentClass = param; }
@@ -134,3 +138,5 @@ void ProgramState::setCurrentMethod(MethodInstance* param) { currentMethod = par
 void ProgramState::setCurrentVariable(VariableInstance* param) { currentVariable = param; }
 void ProgramState::setCurrentConstructor(Constructor* param) { currentConstructor = param; }
 void ProgramState::setRunning(bool param) { running = param; }
+void ProgramState::setAcceptingTypeInput(bool param) { acceptingTypeInput = param; }
+void ProgramState::setScrolling(bool param) { scrolling = param; }

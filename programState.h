@@ -16,6 +16,8 @@ private:
 	VariableInstance* currentVariable;
 	Constructor* currentConstructor;
 	bool running;
+	bool acceptingTypeInput;
+	bool scrolling;
 public:
 	ProgramState();
 	~ProgramState();
@@ -36,6 +38,8 @@ public:
 	VariableInstance* getCurrentVariable();
 	Constructor* getCurrentConstructor();
 	bool getRunning();
+	bool getAcceptingTypeInput();
+	bool getScrolling();
 	// setter methods
 	void setClasses(Array<ClassInstance*>* param);
 	void setCurrentClass(ClassInstance* param);
@@ -43,6 +47,8 @@ public:
 	void setCurrentVariable(VariableInstance* param);
 	void setCurrentConstructor(Constructor* param);
 	void setRunning(bool param);
+	void setAcceptingTypeInput(bool param);
+	void setScrolling(bool param);
 };
 
 #endif
