@@ -15,7 +15,7 @@ public:
   virtual void writeClassInstance(ClassInstance* instance);
 	void writeH(ClassInstance* instance);
 	void writeCpp(ClassInstance* instance);
-	void writeConstructorH(Constructor* constructor,ofstream& fout);
+	void writeConstructorH(ClassInstance* instance,Constructor* constructor,ofstream& fout);
 	void writeMethodH(MethodInstance* method,ofstream& fout);
 	void writeVariableH(VariableInstance* variable,ofstream& fout);
 };

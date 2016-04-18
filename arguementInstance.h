@@ -2,6 +2,7 @@
 #define __ARGUEMENTINSTANCE_H__
 
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ public:
 	ArguementInstance(string t,string n);
 	~ArguementInstance();
 	void display();
+	void writeArguement(ofstream& fout);
 	// getter methods
 	string getType();
 	string getName();

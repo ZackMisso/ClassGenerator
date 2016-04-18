@@ -17,6 +17,14 @@ ArguementInstance::ArguementInstance(string t,string n) {
 
 ArguementInstance::~ArguementInstance() { }
 
+void ArguementInstance::writeArguement(ofstream& fout) {
+	if(isConst)
+		fout<<"const ";
+	fout<<type;
+	fout<<" ";
+	fout<<name;
+}
+
 void ArguementInstance::display() {
 	cout << "Arguement :: " << type << " " << name;
 	if(isConst)

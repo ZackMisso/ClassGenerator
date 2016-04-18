@@ -53,7 +53,7 @@ void Cpp::writeH(ClassInstance* instance) {
 	for(int i=0;i<privVar->getSize();i++)
 		writeVariableH(privVar->get(i),fout);
 	for(int i=0;i<privCon->getSize();i++)
-		writeConstructorH(privCon->get(i),fout);
+		writeConstructorH(instance,privCon->get(i),fout);
 	for(int i=0;i<privMet->getSize();i++)
 		writeMethodH(privMet->get(i),fout);
 	// write protected members
@@ -61,7 +61,7 @@ void Cpp::writeH(ClassInstance* instance) {
 	for(int i=0;i<protVar->getSize();i++)
 		writeVariableH(protVar->get(i),fout);
 	for(int i=0;i<protCon->getSize();i++)
-		writeConstructorH(protCon->get(i),fout);
+		writeConstructorH(instance,protCon->get(i),fout);
 	for(int i=0;i<protMet->getSize();i++)
 		writeMethodH(protMet->get(i),fout);
 	// write public members
@@ -69,9 +69,11 @@ void Cpp::writeH(ClassInstance* instance) {
 	for(int i=0;i<pubVar->getSize();i++)
 		writeVariableH(pubVar->get(i),fout);
 	for(int i=0;i<pubCon->getSize();i++)
-		writeConstructorH(pubCon->get(i),fout);
+		writeConstructorH(instance,pubCon->get(i),fout);
 	for(int i=0;i<pubMet->getSize();i++)
 		writeMethodH(pubMet->get(i),fout);
+	// write getter methods
+	// write setter methods
 	fout <<"}"<< endl;
 	fout << endl;
 	fout <<"#endif"<< endl;
@@ -110,14 +112,48 @@ void Cpp::writeCpp(ClassInstance* instance) {
 	// to be implemented
 }
 
-void Cpp::writeConstructorH(Constructor* constructor,ofstream& fout) {
-	// to be implemented
+void Cpp::writeConstructorH(ClassInstance* instance,Constructor* constructor,ofstream& fout) {
+	fout<<instance->getName();
+	fout<<"(";
+	for(int i=0;i<constructor->getArguements()->getSize();i++) {
+		if(i == constructor->getArguements()->getSize()-1)
+			constructor->getArguements()->get(i)->writeArguement(fout);
+		else {
+			constructor->getArguements()->get(i)->writeArguement(fout);
+			fout<<",";
+		}
+	}
+	fout<<");";
+	fout<<endl;
 }
 
 void Cpp::writeMethodH(MethodInstance* method,ofstream& fout) {
-	// to be implemented
+	if(method->getIsStatic())
+		fout <<"static ";
+	fout<<type;
+	fout<<" ";
+	fout<<name;
+	fout<<"(";
+	for(int i=0;i<arguements->getSize();i++) {
+		if(i==arguements->getSize()-1)
+			fout<<arguements->get(i)->writeArguement(fout);
+		else {
+			fout<<arguements->get(i)->writeArguement(fout);
+			fout<<",";
+		}
+	}
+	fout<<";";
+	fout<<endl;
 }
 
 void Cpp::writeVariableH(VariableInstance* variable,ofstream& fout) {
-	// to be implemented
+	if(variable->getIsStatic())
+		fout<<"static ";
+	if(variable->getIsConst())
+		fout<<"const ";
+	fout<<type;
+	fout<<" ";
+	fout<<name;
+	fout<<";"
+	fout<<endl;
 }
