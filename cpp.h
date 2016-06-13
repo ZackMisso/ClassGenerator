@@ -8,6 +8,10 @@ using namespace std;
 
 class Cpp : public Language {
 private:
+	void writeConstructorCpp(ClassInstance* clas,Constructor* cons,ofstream& fout);
+	void writeMethodCpp(ClassInstance* clas,MethodInstance* method,ofstream& fout);
+	void writeGetterCpp(ClassInstance* clas,VariableInstance* var,ofstream& fout);
+	void writeSetterCpp(ClassInstance* clas,VariableInstance* var,ofstream& fout);
 public:
 	Cpp();
 	~Cpp();

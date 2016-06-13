@@ -1,6 +1,7 @@
 #include "cpp.h"
 #include <iostream>
 #include <algorithm>
+#include "zstr.h"
 
 Cpp::Cpp() {
 	// to be implemented
@@ -26,14 +27,15 @@ void Cpp::writeH(ClassInstance* instance) {
 	string capFileName = instance->getName();
 	transform(capFileName.begin(),capFileName.end(),capFileName.begin(),::toupper);
 	// write Header
-	fout <<"#ifndef __"<<capFileName<<"_H__"<< endl;
-	fout <<"#define __"<<capFileName<<"_H__"<< endl;
+	//fout <<"#ifndef __"<<capFileName<<"_H__"<< endl;
+	//fout <<"#define __"<<capFileName<<"_H__"<< endl;
+	fout << "#pragma once" << endl;
 	fout << endl;
 	// write includes
 	// write class
-	fout << "class "<<instance->getName();
+	fout << "class " << instance->getName();
 	if(instance->getExtends()) {
-		fout <<" : public "<<instance->getParent();
+		fout << " : public " << instance->getParent();
 	}
 	fout << " {" << endl;
 	// get private members
@@ -73,10 +75,12 @@ void Cpp::writeH(ClassInstance* instance) {
 	for(int i=0;i<pubMet->getSize();i++)
 		writeMethodH(pubMet->get(i),fout);
 	// write getter methods
+	fout<<"// getter methods"<<endl;
 	// write setter methods
+	fout<<"// setter methods"<<endl;
 	fout <<"}"<< endl;
 	fout << endl;
-	fout <<"#endif"<< endl;
+	//fout <<"#endif"<< endl;
 	// clean up
 	while(privCon->getSize())
 		privCon->removeLast();
@@ -109,7 +113,72 @@ void Cpp::writeH(ClassInstance* instance) {
 }
 
 void Cpp::writeCpp(ClassInstance* instance) {
-	// to be implemented
+	// create fout
+	string fileName = instance->getName() + ".cpp";
+	ofstream fout(fileName);
+
+	Array<Constructor*>* cons = instance->getConstructors();
+	Array<MethodInstance*>* methods = instance->getMethods();
+	Array<VariableInstance*>* vars = instance->getVariables();
+
+	for(int i=0;i<cons->getSize();i++) {
+		writeConstructorCpp(instance,cons->get(i),fout);
+		fout << endl;
+	}
+	for(int i=0;i<methods->getSize();i++) {
+		writeMethodCpp(instance,methods->get(i),fout);
+		fout << endl;
+	}
+	for(int i=0;i<vars->getSize();i++)
+		if(vars->get(i)->getHasGetter())
+			writeGetterCpp(instance,vars->get(i),fout);
+	fout << endl;
+	for(int i=0;i<vars->getSize();i++)
+		if(vars->get(i)->getHasSetter())
+			writeSetterCpp(instance,vars->get(i),fout);
+	fout << endl;
+
+	fout.close();
+}
+
+void Cpp::writeConstructorCpp(ClassInstance* clas,Constructor* cons,ofstream& fout) {
+	fout << clas->getName() << "::" << clas->getName() << "(";
+	Array<ArguementInstance*>* args = cons->getArguements();
+	for(int i=0;i<args->getSize();i++) {
+		args->get(i)->writeArguement(fout);
+		if(i != args->getSize()-1)
+			fout << ",";
+	}
+	fout << ") {" << endl;
+	fout << "\t// to be implemented" << endl;
+	fout << "}" << endl;
+}
+
+void Cpp::writeMethodCpp(ClassInstance* clas,MethodInstance* method,ofstream& fout) {
+	fout << method->getType() << " " << clas->getName() << "::" << method->getName() << "(";
+	Array<ArguementInstance*>* args = method->getArguements();
+	for(int i=0;i<args->getSize();i++) {
+		args->get(i)->writeArguement(fout);
+		if(i != args->getSize()-1)
+			fout << ",";
+	}
+	fout << ") {" << endl;
+	fout << "\t// to be implemented" << endl;
+	fout << "}" << endl;
+}
+
+void Cpp::writeGetterCpp(ClassInstance* clas,VariableInstance* var,ofstream& fout) {
+	fout << var->getType() << " " << clas->getName() << "::get";
+	fout << ZSTR::convertToProper(var->getName()) << "() { return ";
+	fout << var->getName() << "; }";
+	fout << endl;
+}
+
+void Cpp::writeSetterCpp(ClassInstance* clas,VariableInstance* var,ofstream& fout) {
+	fout << var->getType() << " " << clas->getName() << "::set";
+	fout << ZSTR::convertToProper(var->getName()) << "() { return ";
+	fout << var->getName() << "; }";
+	fout << endl;
 }
 
 void Cpp::writeConstructorH(ClassInstance* instance,Constructor* constructor,ofstream& fout) {
@@ -129,31 +198,32 @@ void Cpp::writeConstructorH(ClassInstance* instance,Constructor* constructor,ofs
 
 void Cpp::writeMethodH(MethodInstance* method,ofstream& fout) {
 	if(method->getIsStatic())
-		fout <<"static ";
-	fout<<type;
-	fout<<" ";
-	fout<<name;
-	fout<<"(";
+		fout << "static ";
+	fout << method->getType();
+	fout << " ";
+	fout << method->getName();
+	fout << "(";
+	Array<ArguementInstance*>* arguements = method->getArguements();
 	for(int i=0;i<arguements->getSize();i++) {
-		if(i==arguements->getSize()-1)
-			fout<<arguements->get(i)->writeArguement(fout);
+		if(i == arguements->getSize()-1)
+			arguements->get(i)->writeArguement(fout);
 		else {
-			fout<<arguements->get(i)->writeArguement(fout);
-			fout<<",";
+			arguements->get(i)->writeArguement(fout);
+			fout << ",";
 		}
 	}
-	fout<<";";
-	fout<<endl;
+	fout << ");";
+	fout << endl;
 }
 
 void Cpp::writeVariableH(VariableInstance* variable,ofstream& fout) {
 	if(variable->getIsStatic())
-		fout<<"static ";
+		fout << "static ";
 	if(variable->getIsConst())
-		fout<<"const ";
-	fout<<type;
-	fout<<" ";
-	fout<<name;
-	fout<<";"
-	fout<<endl;
+		fout << "const ";
+	fout << variable->getType();
+	fout << " ";
+	fout << variable->getName();
+	fout << ";";
+	fout << endl;
 }
