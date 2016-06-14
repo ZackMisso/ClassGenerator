@@ -1,15 +1,45 @@
 #include "cppToken.h"
 
 CppToken::CppToken() {
-  // to be implemented
+  type = TOKEN_NONE;
+  next = 0x0;
+  prev = 0x0;
 }
 
 CppToken::CppToken(string str) {
-  // to be implemented
+  type = TOKEN_NONE;
+  next = 0x0;
+  prev = 0x0;
+  contents = str;
 }
 
 CppToken::~CppToken() {
-  // to be implmeneted
+  if(next) delete next;
+  prev = 0x0;
+}
+
+void CppToken::insertNext(CppToken* other) {
+  if(next) next->setPrev(other);
+  next = other;
+}
+
+void CppToken::insertPrev(CppToken* other) {
+  if(prev) prev->setNext(other);
+  prev = other;
+}
+
+CppToken* CppToken::remove() {
+  if(prev) prev->setNext(next);
+  if(next) next->setPrev(prev);
+  return this;
+}
+
+CppToken* CppToken::getFirst() {
+  return !prev ? this : prev->getFirst();
+}
+
+CppToken* CppToken::getLast() {
+  return !next ? this : next->getLast();
 }
 
 TokenType CppToken::getType() { return type; }
