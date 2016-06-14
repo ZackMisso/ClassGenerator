@@ -11,6 +11,7 @@ using namespace std;
 class Constructor : public Member{
 private:
 	Array<ArguementInstance*>* arguements;
+	bool definedInDec;
 public:
 	Constructor();
 	Constructor(Array<ArguementInstance*>* param);
@@ -19,8 +20,10 @@ public:
 	void lineInfo();
 	// getter methods
 	Array<ArguementInstance*>* getArguements();
+	bool getDefinedInDec();
 	// setter methods
 	void setArguements(Array<ArguementInstance*>* param);
+	void setDefinedInDec(bool param);
 };
 
 #endif

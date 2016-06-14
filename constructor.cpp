@@ -5,10 +5,12 @@ using namespace std;
 
 Constructor::Constructor() {
 	arguements = new Array<ArguementInstance*>();
+	definedInDec = false;
 }
 
 Constructor::Constructor(Array<ArguementInstance*>* param) {
 	arguements = param;
+	definedInDec = false;
 }
 
 Constructor::~Constructor() {
@@ -30,5 +32,7 @@ void Constructor::lineInfo() {
 }
 
 Array<ArguementInstance*>* Constructor::getArguements() { return arguements; }
+bool Constructor::getDefinedInDec() { return definedInDec; }
 
 void Constructor::setArguements(Array<ArguementInstance*>* param) { arguements = param; }
+void Constructor::setDefinedInDec(bool param) { definedInDec = param; }

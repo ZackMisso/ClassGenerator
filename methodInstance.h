@@ -16,6 +16,7 @@ private:
 	string type;
 	bool isStatic;
 	bool isConst;
+	bool definedInDec;
 public:
 	MethodInstance();
 	~MethodInstance();
@@ -28,12 +29,14 @@ public:
 	string getType();
 	bool getIsStatic();
 	bool getIsConst();
+	bool getDefinedInDec();
 	// setter methods
 	void setArguements(Array<ArguementInstance*>* param);
 	void setName(string param);
 	void setType(string param);
 	void setIsStatic(bool param);
 	void setIsConst(bool param);
+	void setDefinedInDec(bool param);
 };
 
 #endif

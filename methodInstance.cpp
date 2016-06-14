@@ -9,6 +9,7 @@ MethodInstance::MethodInstance() {
 	type = "";
 	isStatic = false;
 	isConst = false;
+	definedInDec = false;
 }
 
 MethodInstance::~MethodInstance() {
@@ -51,9 +52,11 @@ string MethodInstance::getName() { return name; }
 string MethodInstance::getType() { return type; }
 bool MethodInstance::getIsStatic() { return isStatic; }
 bool MethodInstance::getIsConst() { return isConst; }
+bool MethodInstance::getDefinedInDec() { return definedInDec; }
 
 void MethodInstance::setArguements(Array<ArguementInstance*>* param) { arguements = param; }
 void MethodInstance::setName(string param) { name = param; }
 void MethodInstance::setType(string param) { type = param; }
 void MethodInstance::setIsStatic(bool param) { isStatic = param; }
 void MethodInstance::setIsConst(bool param) { isConst = param; }
+void MethodInstance::setDefinedInDec(bool param) { definedInDec = param; }
