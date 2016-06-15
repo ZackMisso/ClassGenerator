@@ -1,12 +1,16 @@
 #include "cppParseState.h"
 
 CppParseState::CppParseState() {
+  inClass = false;
+  inBlock = false;
   inGetterMode = false;
   inSetterMode = false;
   inArguementMode = false;
   inDecFile = false;
   inDefFile = false;
   inComment = false;
+  inLineComment = false;
+  prevSlash = false;
   inMethod = false;
   inConstructor = false;
   inDeconstructor = false;
@@ -56,18 +60,26 @@ void CppParserSate::changeToDecFile() {
   inDefFile = false;
 }
 
+bool CppParserState::getInClass() { return inClass; }
+bool CppParserState::getInBlock() { return inBlock; }
 bool CppParserState::getInDecFile() { return inDecFile; }
 bool CppParserState::getInDefFile() { return inDefFile; }
 bool CppParserState::getInGetterMode() { return inGetterMode; }
 bool CppParserState::getInSetterMode() { return inSetterMode; }
 bool CppParserState::getInArguementMode() { return inArguementMode; }
 bool CppParserState::getInComment() { return inComment; }
+bool CppParserState::getInLineComment() { return inLineComment; }
+bool CppParserState::getPrevSlash() { return prevSlash; }
 bool CppParserState::getInMethod() { return inMethod; }
 bool CppParserState::getInConstructor() { return inConstructor; }
 bool CppParserState::getInDeconstructor() { return inDeconstructor; }
 Scope CppParserState::getCurrentScope() { return currentScope; }
 
+void CppParserState::setInClass(bool param) { inClass = param; }
+void CppParserState::setInBlock(bool param) { inBlock = param; }
 void CppParserState::setInComment(bool param) { inComment = param; }
+void CppParserState::setInLineComment(bool param) { inLineComment = param; }
+void CppParserState::setPrevSlash(bool param) { prevSlash = param; }
 void CppParserState::setInMethod(bool param) { inMethod = param; }
 void CppParserState::setInConstructor(bool param) { inConstructor = param; }
 void CppParserState::setInDeconstructor(bool param) { inDeconstructor = param; }
