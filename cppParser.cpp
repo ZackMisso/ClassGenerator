@@ -1,4 +1,5 @@
 #include "cppParser.h"
+#include "zstr.h"
 
 void CppParser::readClass(string file,ClassInstance* clas) {
   // attach extensions to fine name
@@ -20,6 +21,7 @@ CppToken* CppParser::parseTokensH(string file) {
   CppParseState* state = new CppParseState();
   CppTokens* tokens = 0x0;
   CppTokens* lastToken = 0x0; // keep a reference to last for speed
+  state->changeToDecFile();
 
   while(currentToken != TOKEN_NONE) {
     lastToken = currentToken;
@@ -27,8 +29,8 @@ CppToken* CppParser::parseTokensH(string file) {
     state->modifyState(currentToken);
     if(currentToken != TOKEN_NONE) {
       CppToken* newToken = new CppToken();
-
-      // to be implemented
+      newToken->setType(currentToken);
+      newToken->setContents(ZSTR::getSubString(fileC,index,nextIndex));
       
       if(lastToken) lastToken->insertNext(newToken);
       else {
@@ -36,6 +38,7 @@ CppToken* CppParser::parseTokensH(string file) {
 	tokens = newToken;
       }
     }
+    index = nextIndex;
   }
 }
 
@@ -47,6 +50,7 @@ CppToken* CppParser::parseTokensCpp(string file) {
   CppParseState* state = new CppParseState();
   CppToken* tokens = 0x0;
   CppToken* lastToken = 0x0; // keep a reference to last for speed
+  state->changeToDefFile();
 
   while(currentToken != TOKEN_NONE) {
     lastToken = currentToken;
@@ -54,8 +58,8 @@ CppToken* CppParser::parseTokensCpp(string file) {
     state->modifyState(currentToken);
     if(currentToken != TOKEN_NONE) {
       CppToken* newToken = new CppToken();
-      
-      // to be implemented
+      newToken->setType(currentToken);
+      newToken->setContents(ZSTR::getSubString(fileC,index,nextIndex));
       
       if(lastToken) lastToken->insertNext(newToken);
       else {
@@ -63,6 +67,7 @@ CppToken* CppParser::parseTokensCpp(string file) {
 	tokens = newToken;
       }
     }
+    index = nextIndex;
   }
 }
 

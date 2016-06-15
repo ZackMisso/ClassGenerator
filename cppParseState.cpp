@@ -4,6 +4,12 @@ CppParseState::CppParseState() {
   inGetterMode = false;
   inSetterMode = false;
   inArguementMode = false;
+  inDecFile = false;
+  inDefFile = false;
+  inComment = false;
+  inMethod = false;
+  inConstructor = false;
+  inDeconstructor = false;
   Scope currentScope = SCOPE_PUBLIC;
 }
 
@@ -40,7 +46,28 @@ void CppParseState::modifyState(TokenType lastToken) {
   }
 }
 
+void CppParserState::changeToDefFile() {
+  inDecFile = false;
+  inDefFile = true;
+}
+
+void CppParserSate::changeToDecFile() {
+  inDecFile = true;
+  inDefFile = false;
+}
+
+bool CppParserState::getInDecFile() { return inDecFile; }
+bool CppParserState::getInDefFile() { return inDefFile; }
 bool CppParserState::getInGetterMode() { return inGetterMode; }
 bool CppParserState::getInSetterMode() { return inSetterMode; }
 bool CppParserState::getInArguementMode() { return inArguementMode; }
+bool CppParserState::getInComment() { return inComment; }
+bool CppParserState::getInMethod() { return inMethod; }
+bool CppParserState::getInConstructor() { return inConstructor; }
+bool CppParserState::getInDeconstructor() { return inDeconstructor; }
 Scope CppParserState::getCurrentScope() { return currentScope; }
+
+void CppParserState::setInComment(bool param) { inComment = param; }
+void CppParserState::setInMethod(bool param) { inMethod = param; }
+void CppParserState::setInConstructor(bool param) { inConstructor = param; }
+void CppParserState::setInDeconstructor(bool param) { inDeconstructor = param; }
