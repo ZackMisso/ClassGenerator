@@ -15,6 +15,7 @@ private:
     GETTER_OR_SETTER,
     UNKNOWN,
     ENDBLOCK,
+    ENDCLASS,
     END,
     NONE
   };

@@ -5,7 +5,6 @@
 class CppParseState {
 private:
   bool inClass;
-  bool inBlock;
   bool inDecFile;
   bool inDefFile;
   bool inGetterMode;
@@ -17,6 +16,7 @@ private:
   bool inMethod;
   bool inConstructor;
   bool inDeconstructor;
+  int blockDepth;
   Scope currentScope;
   void falsifyModes();
 public:
@@ -25,9 +25,11 @@ public:
   void modifyState(TokenType lastToken);
   void changeToDefFile();
   void chengeToDecFile();
+  void incrementBlockDepth();
+  void decrementBlockDepth();
+  bool isInBlock();
   // getter methods
   bool getInClass();
-  bool getInBlock();
   bool getInDefFile();
   bool getInDecFile();
   bool getInGetterMode();
@@ -42,7 +44,6 @@ public:
   Scope getCurrentScope();
   // setter methods
   void setInClass(bool param);
-  void setInBlock(bool param);
   void setInComment(bool param);
   void setInLineComment(bool param);
   void setPrevSlash(bool param);

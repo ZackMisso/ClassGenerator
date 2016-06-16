@@ -19,3 +19,8 @@ string ZSTR::getSubString(const char* str,int start,int end) {
   // to be implemented
   return "test";
 }
+
+string ZSTR::getFirstNonSpacePos(const char* str,int start) {
+  // to be implemented
+  return start;
+}

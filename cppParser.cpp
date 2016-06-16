@@ -101,7 +101,7 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
 	//    if it was preceeded by a '/'. If so, this is a line comment
 	// 4. Otherwise, set the prev slash to true and continue parsing
         
-	if(state->getInBlock() || state->getInLineComment()) currentIndex++;
+	if(state->isInBlock() || state->getInLineComment()) currentIndex++;
         else if(state->getInComment()) {
           if(state->getPrevSlash()) keyFound = COMMENT;
         }
@@ -114,14 +114,14 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
       }
       case '*': {
         // If the character is a '*' then it can be one of 4 cases:
-	// 1. If the character is in a line comment, ignore it.
+	// 1. If the character is in a line comment or block ignore it.
 	// 2. If the character is preceded by a slash, set the state
 	//    to be inside a comment.
 	// 3. If the character is inside a comment, set the prev
 	//    slash state to true
 	// 4  Otherwise set prev slash to false and carry on
 
-        if(state->getInLineComment()) currentIndex++;
+        if(state->getInLineComment() || state->isInBlock()) currentIndex++;
         else if(state->getPrevSlash() && !state->getInComment()) {
           state->setPrevSlash(false);
           state->setInComment(true);
@@ -141,7 +141,7 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
 	// 2. If the character is in a .cpp file, ignore it
 	// 3. Otherwise it is at the end of a scope declaration
 
-        if(state->getInComment() || state->getInLineComment() || state->getInBlock()) {
+        if(state->getInComment() || state->getInLineComment() || state->isInBlock()) {
           state->setPrevSlash(false);
           currentIndex++;
         } else if(state->getInDef()) { 
@@ -158,7 +158,7 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
 	// 2. If the character is in a .cpp file, ignore it
 	// 3. Other wise it is at the end of a method/variable dec.
 
-        if(state->getInComment() || state->getInLineComment() || state->getInBlock()) {
+        if(state->getInComment() || state->getInLineComment() || state->isInBlock()) {
           state->setPrevSlash(false);
           currentIndex++;
         } else if(state->getInDef()) {
@@ -194,29 +194,37 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
       }
       case '{': {
         // If the character is a '{' then it can be one of 2 cases:
-	// 1. If the character is in a block or comment, ignore it
-	// 2. Otherwise it represents the beginning of a block
+	// 1. If the character is in a comment, ignore it
+	// 2. Otherwise increment the block depth
 
-        if(state->getInComment() || state->getInLineComment() || state->getInBlock()) {
+        if(state->getInComment() || state->getInLineComment()) {
           state->setPrevSlash(false);
           currentIndex++;
         } else {
 	  state->setPrevSlash(false);
-	  state->setInBlock(true);
+	  state->incrementBlockDepth();
 	  currentIndex++;
         }
         break;
       }
       case '}': {
-        // TODO :: ERROR IN LOGIC, BLOCK WILL EXIT INCORRECTLY AT THE
-	// FIRST '}' THAT APPEARS..... make a counter
-        if(!state->getInComment() && !state->getInLineComment()) {
+        // If the character is a '}' then it can be one of 3 cases:
+	// 1. If the character is in a comment, ignore it
+	// 2. If the character is in a block, decrement the depth
+	// 3. Otherwise it is in the end of a class
+	// 3rd case is not implemented yet
+
+        if(state->getInComment() || state->getInLineComment()) {
           state->setPrevSlash(false);
-          // to be implemented
           currentIndex++;
+        } else if(state->isInBlock()) {
+          state->decrementBlockDepth();
+	  if(!state->isInBlock()) {
+              keyFound = ENDBLOCK;
+	  }
         } else {
-          keyFound = ENDBLOCK;
-        }
+          keyFound = UNKNOWN; // <-- could be end of class later
+	}
         break;
       }
       default: {
@@ -226,9 +234,76 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
       }
     }
   }
-  // to be implemented
-  // this will be a doozy
-  return -1;
+
+  // Now we have reduced it to a specific set of possible states.
+  // Here is a switch that handles each one's logic
+  switch(keyFound) {
+    case ENDBLOCK:
+    case METHOD_VARIABLE_CONS_DECONS: {
+      // to be implemented <-- convoluted one
+      // Logic:
+      //  - Find the first non-space character
+      //  - If it is a '~', it is a destructor
+      //  - Else traverse until you hit a ';' or a '('
+      //  - While you traverse keep track of the number of gaps
+      //  - If you hit a ';' first, then it is a variable
+      //  - Otherwise it is either a method or a constructor
+      //  - If the number of spaces between the '(' and first character
+      //    is one then it is a method, because it has a type.
+      //  - If the number of spaces is zero, it is a constructor
+      
+      // use ZSTR::getFirstNonSpacePos
+      break;
+    }
+    case PRAGMA_OR_INCLUDE: {
+      // find the end of the line
+      int indexOfPound = currentIndex;
+      while(file[currentIndex] != '\n') currentIndex++;
+      if(file[indexOfPound+1] == 'i' && file[indexOfPound+2] == 'n') type = TOKEN_INCLUDE;
+      else type = TOKEN_PRAGMA;
+      // TODO :: implement define, ifndef, etc.
+      break;
+    }
+    case COMMENT: {
+      type = TOKEN_COMMENT;
+      break;
+    }
+    case LINE_COMMENT: {
+      type = TOKEN_COMMENT;
+      // find the end of the line
+      while(file[currentIndex] != '\n') currentIndex++;
+      break;
+    }
+    case SCOPE: {
+      type = TOKEN_SCOPE;
+      break;
+    }
+    case GETTER_OR_SETTER: {
+      // not going to be used for now
+      type = TOKEN_UNKNOWN;
+      break;
+    }
+    case UNKNOWN: {
+      type = TOKEN_UNKNOWN;
+      break;
+    }
+    case ENDCLASS: {
+      // not going to be used for now
+      type = TOKEN_UNKNOWN;
+      break;
+    }
+    case END: {
+      type = TOKEN_UNKNOWN;
+      break;
+    }
+    default: {
+      // this should not be reached, throw error...
+      type = TOKEN_UNKNOWN;
+      break;
+    }
+  }
+
+  return currentIndex;
 }
 
 // starts to initialize the class instance from what is known from

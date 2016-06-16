@@ -2,7 +2,7 @@
 
 CppParseState::CppParseState() {
   inClass = false;
-  inBlock = false;
+  blockDepth = 0;
   inGetterMode = false;
   inSetterMode = false;
   inArguementMode = false;
@@ -60,8 +60,19 @@ void CppParserSate::changeToDecFile() {
   inDefFile = false;
 }
 
+void CppParserState::incrementBlockDepth() {
+  blockDepth++;
+}
+
+void CppParserState::decrementBlockDepth() {
+  if(blockDepth > 0) blockDepth--;
+}
+
+bool CppParserState::isInBlock() {
+  return blockDepth > 0;
+}
+
 bool CppParserState::getInClass() { return inClass; }
-bool CppParserState::getInBlock() { return inBlock; }
 bool CppParserState::getInDecFile() { return inDecFile; }
 bool CppParserState::getInDefFile() { return inDefFile; }
 bool CppParserState::getInGetterMode() { return inGetterMode; }
@@ -76,7 +87,6 @@ bool CppParserState::getInDeconstructor() { return inDeconstructor; }
 Scope CppParserState::getCurrentScope() { return currentScope; }
 
 void CppParserState::setInClass(bool param) { inClass = param; }
-void CppParserState::setInBlock(bool param) { inBlock = param; }
 void CppParserState::setInComment(bool param) { inComment = param; }
 void CppParserState::setInLineComment(bool param) { inLineComment = param; }
 void CppParserState::setPrevSlash(bool param) { prevSlash = param; }
