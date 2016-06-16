@@ -6,6 +6,18 @@
 
 class CppParser {
 private:
+  enum PossibleToken {
+    METHOD_VARIABLE_CONS_DECONS,
+    PRAGMA_OR_INCLUDE,
+    COMMENT,
+    LINE_COMMENT,
+    SCOPE,
+    GETTER_OR_SETTER,
+    UNKNOWN,
+    ENDBLOCK,
+    END,
+    NONE
+  };
 public:
   static void readClass(string file,ClassInstance* clas);
   static CppToken* parseTokensH(string file);
