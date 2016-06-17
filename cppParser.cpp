@@ -35,7 +35,7 @@ CppToken* CppParser::parseTokensH(string file) {
       if(lastToken) lastToken->insertNext(newToken);
       else {
         lastToken = newToken;
-	tokens = newToken;
+        tokens = newToken;
       }
     }
     index = nextIndex;
@@ -64,7 +64,7 @@ CppToken* CppParser::parseTokensCpp(string file) {
       if(lastToken) lastToken->insertNext(newToken);
       else {
         lastToken = newToken;
-	tokens = newToken;
+        tokens = newToken;
       }
     }
     index = nextIndex;
@@ -94,14 +94,14 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
     switch(file[currentIndex]) {
       case '/': {
         // If the character is a '/' then it can be one of four cases:
-	// 1. If the character is in a block or a line comment, ignore it
-	// 2. If the character is in a comment, check if it was preceded
-	//    by a '*', if so, declare that the possible token is comment
-	// 3. If the character is not in a line or regular comment, check
-	//    if it was preceeded by a '/'. If so, this is a line comment
-	// 4. Otherwise, set the prev slash to true and continue parsing
-        
-	if(state->isInBlock() || state->getInLineComment()) currentIndex++;
+        // 1. If the character is in a block or a line comment, ignore it
+        // 2. If the character is in a comment, check if it was preceded
+        //    by a '*', if so, declare that the possible token is comment
+        // 3. If the character is not in a line or regular comment, check
+        //    if it was preceeded by a '/'. If so, this is a line comment
+        // 4. Otherwise, set the prev slash to true and continue parsing
+
+	      if(state->isInBlock() || state->getInLineComment()) currentIndex++;
         else if(state->getInComment()) {
           if(state->getPrevSlash()) keyFound = COMMENT;
         }
@@ -114,12 +114,12 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
       }
       case '*': {
         // If the character is a '*' then it can be one of 4 cases:
-	// 1. If the character is in a line comment or block ignore it.
-	// 2. If the character is preceded by a slash, set the state
-	//    to be inside a comment.
-	// 3. If the character is inside a comment, set the prev
-	//    slash state to true
-	// 4  Otherwise set prev slash to false and carry on
+        // 1. If the character is in a line comment or block ignore it.
+        // 2. If the character is preceded by a slash, set the state
+        //    to be inside a comment.
+        // 3. If the character is inside a comment, set the prev
+        //    slash state to true
+        // 4  Otherwise set prev slash to false and carry on
 
         if(state->getInLineComment() || state->isInBlock()) currentIndex++;
         else if(state->getPrevSlash() && !state->getInComment()) {
@@ -137,26 +137,26 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
       }
       case ':': { // TODO : Incorporate using ':' for inheritence
         // If the character is a ':' then it can be one of 3 cases:
-	// 1. If the character is in a block or comment, ignore it
-	// 2. If the character is in a .cpp file, ignore it
-	// 3. Otherwise it is at the end of a scope declaration
+        // 1. If the character is in a block or comment, ignore it
+        // 2. If the character is in a .cpp file, ignore it
+        // 3. Otherwise it is at the end of a scope declaration
 
         if(state->getInComment() || state->getInLineComment() || state->isInBlock()) {
           state->setPrevSlash(false);
           currentIndex++;
-        } else if(state->getInDef()) { 
-	  state->setPrevSlash(false);
-	  currentIndex++;
-	}else {
+        } else if(state->getInDef()) {
+	        state->setPrevSlash(false);
+          currentIndex++;
+	      }else {
           keyFound = SCOPE;
         }
         break;
       }
       case ';': { // TODO : Incorporate using ';' for static setting
         // If the character is a ';' then it can be one of 3 cases:
-	// 1. If the character is in a block or comment, ignore it
-	// 2. If the character is in a .cpp file, ignore it
-	// 3. Other wise it is at the end of a method/variable dec.
+	      // 1. If the character is in a block or comment, ignore it
+	      // 2. If the character is in a .cpp file, ignore it
+	      // 3. Other wise it is at the end of a method/variable dec.
 
         if(state->getInComment() || state->getInLineComment() || state->isInBlock()) {
           state->setPrevSlash(false);
@@ -176,55 +176,55 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
         //} else {
         //  //keyFound = '\n';
         //}
-	currentIndex++;
+	      currentIndex++;
         break;
       }
       case '\0': {
         // If the character is a '\0' then it can be one of 2 cases:
-	// 1. If the character is in a block or comment, ignore it
-	// 2. Otherwise it represents the end of the file
+        // 1. If the character is in a block or comment, ignore it
+        // 2. Otherwise it represents the end of the file
 
         if(state->getInComment() || state->getInLineComment() || state->getInBlock()) {
           state->setPrevSlash(false);
           currentIndex++;
-	} else {
+	      } else {
           keyFound = END;
-	}  
+        }
         break;
       }
       case '{': {
         // If the character is a '{' then it can be one of 2 cases:
-	// 1. If the character is in a comment, ignore it
-	// 2. Otherwise increment the block depth
+	      // 1. If the character is in a comment, ignore it
+        // 2. Otherwise increment the block depth
 
         if(state->getInComment() || state->getInLineComment()) {
           state->setPrevSlash(false);
           currentIndex++;
         } else {
-	  state->setPrevSlash(false);
-	  state->incrementBlockDepth();
-	  currentIndex++;
+          state->setPrevSlash(false);
+          state->incrementBlockDepth();
+          currentIndex++;
         }
         break;
       }
       case '}': {
         // If the character is a '}' then it can be one of 3 cases:
-	// 1. If the character is in a comment, ignore it
-	// 2. If the character is in a block, decrement the depth
-	// 3. Otherwise it is in the end of a class
-	// 3rd case is not implemented yet
+        // 1. If the character is in a comment, ignore it
+        // 2. If the character is in a block, decrement the depth
+        // 3. Otherwise it is in the end of a class
+        // 3rd case is not implemented yet
 
         if(state->getInComment() || state->getInLineComment()) {
           state->setPrevSlash(false);
           currentIndex++;
         } else if(state->isInBlock()) {
           state->decrementBlockDepth();
-	  if(!state->isInBlock()) {
-              keyFound = ENDBLOCK;
-	  }
+          if(!state->isInBlock()) {
+            keyFound = ENDBLOCK;
+          }
         } else {
           keyFound = UNKNOWN; // <-- could be end of class later
-	}
+	      }
         break;
       }
       default: {
@@ -251,8 +251,18 @@ int CppParser::getNextToken(const char* file,int startIndex,TokenType& type,CppP
       //  - If the number of spaces between the '(' and first character
       //    is one then it is a method, because it has a type.
       //  - If the number of spaces is zero, it is a constructor
-      
-      // use ZSTR::getFirstNonSpacePos
+
+      int index = ZSTR::getFirstNonSpacePos(file,startIndex);
+      if(file[index] == '~') type = TOKEN_DESTRUCTOR;
+      else {
+        int index = ZSTR::getNextPosForCharacters(';','(');
+        if(file[index] == ';') type = TOKEN_VARIABLE;
+        else {
+          int spaces = ZSTR::getSpacesBetween(file,startIndex,index);
+          if(spaces == 0) type = TOKEN_CONSTRUCTOR;
+          else type = TOKEN_FUNC;
+        }
+      }
       break;
     }
     case PRAGMA_OR_INCLUDE: {

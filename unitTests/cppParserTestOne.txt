@@ -1,0 +1,16 @@
+#pragma once
+
+class TestClass {
+private:
+  int num;
+  float numf;
+  Object* obj;
+public:
+  TestClass();
+  ~TestClass();
+  void thisIsATest();
+  virtual void thisIsAVirtualTest();
+  // this is a test line comment
+  /* this is a test comment
+  */
+};

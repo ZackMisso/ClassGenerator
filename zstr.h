@@ -13,4 +13,6 @@ public:
   static string convertToUpper(string str);
   static string getSubString(const char* str,int start,int end);
   static int getFirstNonSpacePos(const char* str,int start);
+  static int getNextPosForCharacters(const char* str,int start,char one,char two);
+  static int getSpacesBetween(const char* str,int start,int end);
 };
