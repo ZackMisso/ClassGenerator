@@ -36,10 +36,14 @@ private:
   string contents;
 public:
   CppToken();
+  CppToken(TokenType t);
   CppToken(string str);
   ~CppToken();
   void insertNext(CppToken* other);
   void insertPrev(CppToken* other);
+  void addToBack(CppToken* tok);
+  void addToFront(CppToken* tok);
+  int length();
   CppToken* remove();
   CppToken* getFirst();
   CppToken* getLast();

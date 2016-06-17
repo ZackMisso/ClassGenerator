@@ -15,4 +15,5 @@ public:
   static int getFirstNonSpacePos(const char* str,int start);
   static int getNextPosForCharacters(const char* str,int start,char one,char two);
   static int getSpacesBetween(const char* str,int start,int end);
+  static const char* readFile(string fileName);
 };

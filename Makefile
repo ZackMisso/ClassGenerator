@@ -5,6 +5,7 @@ CFLAGS+= -std=c++11
 PROD=lazy
 
 SRCS= $(shell ls *.cpp)
+SRCS+= $(shell ls unitTests/*.cpp)
 
 OBJS= $(patsubst %.cpp, %.o, $(SRCS))
 
@@ -19,3 +20,4 @@ $(PROD): $(OBJS)
 clean:
 	rm -f $(PROD)
 	rm -f *.o
+	rm -f unitTests/*.o

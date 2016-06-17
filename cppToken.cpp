@@ -6,6 +6,12 @@ CppToken::CppToken() {
   prev = 0x0;
 }
 
+CppToken::CppToken(TokenType t) {
+  type = t;
+  next = 0x0;
+  prev = 0x0;
+}
+
 CppToken::CppToken(string str) {
   type = TOKEN_NONE;
   next = 0x0;
@@ -26,6 +32,24 @@ void CppToken::insertNext(CppToken* other) {
 void CppToken::insertPrev(CppToken* other) {
   if(prev) prev->setNext(other);
   prev = other;
+}
+
+void CppToken::addToBack(CppToken* tok) {
+  getLast()->insertNext(tok);
+}
+
+void CppToken::addToFront(CppToken* tok) {
+  getFirst()->insertPrev(tok);
+}
+
+int CppToken::length() {
+  CppToken* tok = getFirst();
+  int len = 1;
+  while(tok->next) {
+    len++;
+    tok = tok->getNext();
+  }
+  return len;
 }
 
 CppToken* CppToken::remove() {

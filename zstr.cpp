@@ -44,3 +44,8 @@ int ZSTR::getSpacesBetween(const char* str,int start,int end) {
   }
   return spaces;
 }
+
+const char* ZSTR::readFile(string fileName) {
+  // to be implemented
+  return "test";
+}
