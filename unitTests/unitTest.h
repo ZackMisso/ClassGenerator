@@ -8,6 +8,7 @@ private:
 public:
   UnitTest();
   virtual void runTest();
+  virtual void setUpTest();
   void reportTestResult();
   // getter methods
   string getName();

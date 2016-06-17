@@ -5,4 +5,5 @@
 class CppParserTestTwo {
   CppParserTestTwo();
   virtual void runTest();
+  virtual void setUpTest();
 }

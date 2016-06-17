@@ -10,6 +10,7 @@ void UnitTestManager::initializeUnitTests() {
 
 void UnitTestManager::runUnitTests() {
   for(int i=0;i<unitTests->getSize();i++) {
+    unitTests->get(i)->setUpTest();
     unitTests->get(i)->runTest();
   }
 }

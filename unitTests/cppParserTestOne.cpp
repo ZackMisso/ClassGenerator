@@ -7,3 +7,7 @@ CppParserTestOne::CppParserTestOne() {
 void CppParserTestOne::runTest() {
   // to be implemented
 }
+
+void CppParserTestOne::setUpTest() {
+  // to be implemented
+}

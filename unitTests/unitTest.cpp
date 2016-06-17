@@ -14,6 +14,10 @@ void UnitTest::runTest() {
   error = "test not implemented";
 }
 
+void UnitTest::setUpTest() {
+  // does nothing. Only extended if needed
+}
+
 void UnitTest::reportTestResult() {
   cout << name << endl;
   if(passed) {

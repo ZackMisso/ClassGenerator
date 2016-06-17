@@ -7,3 +7,7 @@ CppParserTestTwo::CppParserTestTwo() {
 void CppParserTestTwo::runTest() {
   // to be implemented
 }
+
+void CppParserTestTwo::setUpTest() {
+  // to be implemented
+}

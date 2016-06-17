@@ -7,3 +7,7 @@ CppParserTestThree::CppParserTestThree() {
 void CppParserTestThree::runTest() {
   // to be implemented
 }
+
+void CppParserTestThree::setUpTest() {
+  // to be implemented
+}
