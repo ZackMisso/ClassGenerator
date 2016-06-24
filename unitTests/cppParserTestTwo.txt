@@ -1,1 +1,24 @@
-This needs to be implemented
+#include "testClass.h"
+
+TestClass::TestClass() {
+  num = 0;
+  numf = 0.0f;
+  obj = 0x0;
+}
+
+TestClass::~TestClass() {
+  delete obj;
+}
+
+void TestClass::thisIsATest() {
+  // blah method stuffs
+  string blah = "method stuffs";
+}
+
+void TestClass::thisIsAVirtualTest() {
+  // this is where i would put an implementation
+  // ...
+  // ...
+  // ...
+  // IF I HAD ONE
+}

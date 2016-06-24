@@ -31,9 +31,9 @@ void CppParserTestOne::runTest() {
       return;
     }
     tmpCorrect = tmpCorrect->getNext();
-    tmpParsed - tmpParsed->getNext();
+    tmpParsed = tmpParsed->getNext();
   }
-  // if no mismatch, the test is passed
+  // if no mismatch, the test passed
   setPassed(true);
   delete parsed;
   //delete file;
